@@ -1,0 +1,12 @@
+# macOS
+.DS_Store
+
+# Claude Code config
+.claude/
+
+# Large audio source files (served via Google Drive embeds instead)
+*.mp3
+
+# Working files not needed for deployment
+audio/
+Midnight Snacks Sticker Black and Green LETTERS ONLY.png
