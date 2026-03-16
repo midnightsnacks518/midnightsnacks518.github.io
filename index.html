@@ -59,8 +59,9 @@
     /* ===== Slideshow ===== */
     .band-slideshow { margin-top:3.5rem; position:relative; border-radius:20px; overflow:hidden; border:3px solid rgba(93,212,186,.35); background:#000; }
     .slideshow-track { display:flex; transition:transform .65s cubic-bezier(.4,0,.2,1); will-change:transform; }
-    .slideshow-slide { min-width:100%; height:380px; position:relative; flex-shrink:0; }
+    .slideshow-slide { min-width:100%; height:500px; position:relative; flex-shrink:0; }
     .slideshow-slide img { width:100%; height:100%; object-fit:cover; display:block; }
+    .slideshow-slide.slide-portrait img { object-fit:contain; }
     .slideshow-btn { position:absolute; top:50%; transform:translateY(-50%); z-index:10; background:rgba(26,26,62,.72); border:2px solid rgba(93,212,186,.5); color:var(--bright-teal); width:44px; height:44px; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; transition:all .2s; backdrop-filter:blur(4px); font-size:1.5rem; line-height:1; }
     .slideshow-btn:hover { background:rgba(93,212,186,.3); border-color:var(--lime); color:var(--lime); }
     .slideshow-prev { left:1rem; }
@@ -68,7 +69,7 @@
     .slideshow-dots { position:absolute; bottom:.9rem; left:50%; transform:translateX(-50%); display:flex; gap:.5rem; z-index:10; }
     .slideshow-dot { width:8px; height:8px; border-radius:50%; background:rgba(245,245,255,.35); cursor:pointer; transition:all .25s; border:none; padding:0; flex-shrink:0; }
     .slideshow-dot.active { background:var(--lime); transform:scale(1.4); }
-    @media (max-width:560px) { .slideshow-slide { height:240px; } }
+    @media (max-width:560px) { .slideshow-slide { height:320px; } }
     .nav-links { display:flex; gap:2.5rem; list-style:none; }
     .nav-links a { color:var(--cream); text-decoration:none; font-size:.9rem; font-weight:700; letter-spacing:.16em; text-transform:uppercase; transition:color .2s; }
     .nav-links a:hover { color:var(--lime); }
@@ -151,14 +152,14 @@
     .tag-original { background:rgba(144,238,144,.15); border:2px solid rgba(144,238,144,.45); color:var(--lime); }
     .tag-cover { background:rgba(93,212,186,.15); border:2px solid rgba(93,212,186,.45); color:var(--bright-teal); }
 
-    .audio-list { display:flex; flex-direction:column; gap:1rem; margin-bottom:3.5rem; }
+    .audio-list { display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; margin-bottom:3.5rem; }
     .audio-card { padding:1.2rem 1.6rem; background:rgba(93,212,186,.08); border:3px solid rgba(93,212,186,.3); border-radius:16px; transition:border-color .2s, background .2s; }
     .audio-card:hover { border-color:var(--bright-teal); background:rgba(93,212,186,.13); }
     .audio-header { display:flex; align-items:center; gap:1rem; margin-bottom:.8rem; flex-wrap:wrap; }
-    .audio-title { font-family:'Caveat',cursive; font-size:1.5rem; font-weight:700; color:var(--white); flex:1; }
+    .audio-title { font-family:'Caveat',cursive; font-size:1.5rem; font-weight:700; color:var(--white); flex:0 0 100%; }
     .audio-date { font-size:.8rem; font-family:'Patrick Hand',cursive; color:rgba(245,245,255,.5); letter-spacing:.1em; white-space:nowrap; }
     .audio-card audio { width:100%; }
-    .audio-player-frame { width:100%; height:80px; border:none; border-radius:8px; }
+    .audio-player-frame { width:100%; height:80px; border:none; border-radius:6px; display:block; }
     .video-embed.video-placeholder { display:flex; align-items:center; justify-content:center; }
     .video-placeholder-text { font-family:'Patrick Hand',cursive; font-size:.9rem; letter-spacing:.1em; color:rgba(245,245,255,.35); }
 
@@ -226,6 +227,7 @@
       .form-row { grid-template-columns:1fr; }
       .show-row { grid-template-columns:90px 1fr auto; gap:1.2rem; }
       .video-grid { grid-template-columns:repeat(2,1fr); }
+      .audio-list { grid-template-columns:repeat(2,1fr); }
       /* Mobile gradient: keep dark throughout so text stays readable */
       body {
         background: linear-gradient(to bottom, var(--deep-navy) 0%, var(--navy) 30%, var(--midnight-blue) 60%, var(--midnight-blue) 90%, var(--navy) 100%);
@@ -240,6 +242,7 @@
       .nav-links.open { display:flex; }
       .nav-links a { display:block; padding:.8rem 1.5rem; font-size:.85rem; }
       .members-grid { grid-template-columns:1fr; }
+      .audio-list { grid-template-columns:1fr; }
       .doodle { opacity: 0.12 !important; }
       /* Hero: give bottom padding so scroll indicator doesn't overlap buttons */
       #hero { padding-bottom:7rem; }
@@ -436,16 +439,16 @@
     <div class="band-slideshow reveal">
       <div class="slideshow-track" id="slideshowTrack">
         <div class="slideshow-slide"><img src="images/slideshow/Cares_Cup_X_01787.jpeg" alt="Midnight Snacks" loading="lazy"></div>
-        <div class="slideshow-slide"><img src="images/slideshow/Cares_Cup_X_01796.jpeg" alt="Midnight Snacks" loading="lazy"></div>
+        <div class="slideshow-slide slide-portrait"><img src="images/slideshow/Cares_Cup_X_01796-square.jpeg" alt="Midnight Snacks" loading="lazy"></div>
         <div class="slideshow-slide"><img src="images/slideshow/Cares_Cup_X_01803.jpeg" alt="Midnight Snacks" loading="lazy"></div>
-        <div class="slideshow-slide"><img src="images/slideshow/FullSizeRender.jpeg" alt="Midnight Snacks" loading="lazy"></div>
+        <div class="slideshow-slide slide-portrait"><img src="images/slideshow/FullSizeRender-square.jpeg" alt="Midnight Snacks" loading="lazy"></div>
         <div class="slideshow-slide"><img src="images/slideshow/IMG_1348.jpeg" alt="Midnight Snacks" loading="lazy"></div>
-        <div class="slideshow-slide"><img src="images/slideshow/IMG_1455.jpeg" alt="Midnight Snacks" loading="lazy"></div>
+        <div class="slideshow-slide slide-portrait"><img src="images/slideshow/IMG_1455-portrait.jpeg" alt="Midnight Snacks" loading="lazy"></div>
         <div class="slideshow-slide"><img src="images/slideshow/IMG_1960.jpeg" alt="Midnight Snacks" loading="lazy"></div>
-        <div class="slideshow-slide"><img src="images/slideshow/IMG_2219.jpeg" alt="Midnight Snacks" loading="lazy"></div>
-        <div class="slideshow-slide"><img src="images/slideshow/IMG_3161.jpeg" alt="Midnight Snacks" loading="lazy"></div>
-        <div class="slideshow-slide"><img src="images/slideshow/IMG_5511.jpeg" alt="Midnight Snacks" loading="lazy"></div>
-        <div class="slideshow-slide"><img src="images/slideshow/PXL_20250920_212306177.jpg" alt="Midnight Snacks" loading="lazy"></div>
+        <div class="slideshow-slide slide-portrait"><img src="images/slideshow/IMG_2219-portrait.jpeg" alt="Midnight Snacks" loading="lazy"></div>
+        <div class="slideshow-slide slide-portrait"><img src="images/slideshow/IMG_3161-portrait.jpeg" alt="Midnight Snacks" loading="lazy"></div>
+        <div class="slideshow-slide slide-portrait"><img src="images/slideshow/IMG_5511-portrait.jpeg" alt="Midnight Snacks" loading="lazy"></div>
+        <div class="slideshow-slide slide-portrait"><img src="images/slideshow/PXL_20250920_212306177-portrait.jpg" alt="Midnight Snacks" loading="lazy"></div>
         <div class="slideshow-slide"><img src="images/slideshow/PXL_20250920_213311251.jpg" alt="Midnight Snacks" loading="lazy"></div>
         <div class="slideshow-slide"><img src="images/slideshow/PXL_20250920_235924591.jpg" alt="Midnight Snacks" loading="lazy"></div>
       </div>
@@ -503,7 +506,7 @@
       <div class="setlist-heading">Live Videos</div>
       <div class="video-grid">
         <div class="video-card">
-          <div class="video-embed" style="padding-top:75%">
+          <div class="video-embed">
             <iframe src="https://player.vimeo.com/video/1174056398?h=bf8cc73448&badge=0&autopause=0&player_id=0&app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" title="Special Treat"></iframe>
           </div>
           <div class="video-title">Special Treat</div>
@@ -513,12 +516,22 @@
           </div>
         </div>
         <div class="video-card">
-          <div class="video-embed video-placeholder">
-            <span class="video-placeholder-text">📹 Video Coming Soon</span>
+          <div class="video-embed">
+            <iframe src="https://player.vimeo.com/video/1174086342?h=fc57372d70&badge=0&autopause=0&player_id=0&app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" title="Sage Advice (jam)"></iframe>
           </div>
-          <div class="video-title">—</div>
+          <div class="video-title">Sage Advice (jam)</div>
           <div class="video-meta">
-            <span class="video-date">2025</span>
+            <span class="video-date">Aug 2025</span>
+            <span class="media-tag tag-original">Original</span>
+          </div>
+        </div>
+        <div class="video-card">
+          <div class="video-embed">
+            <iframe src="https://player.vimeo.com/video/1174121548?h=da77b5d0a4&badge=0&autopause=0&player_id=0&app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" title="Gotta Jibbo -> Hell Yes"></iframe>
+          </div>
+          <div class="video-title">Gotta Jibbo → Hell Yes</div>
+          <div class="video-meta">
+            <span class="video-date">Aug 2025</span>
             <span class="media-tag tag-cover">Cover</span>
           </div>
         </div>
