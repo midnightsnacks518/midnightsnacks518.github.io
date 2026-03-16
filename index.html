@@ -55,6 +55,20 @@
     nav { position: fixed; top:0; left:0; right:0; z-index:500; display:flex; justify-content:space-between; align-items:center; padding:1rem 3rem; background: linear-gradient(to bottom, rgba(26,26,62,.98) 0%, rgba(26,26,62,0) 100%); backdrop-filter: blur(10px); }
     .nav-logo { text-decoration:none; display:flex; align-items:center; }
     .nav-wordmark { height:44px; width:124px; display:block; object-fit:contain; object-position:left center; }
+
+    /* ===== Slideshow ===== */
+    .band-slideshow { margin-top:3.5rem; position:relative; border-radius:20px; overflow:hidden; border:3px solid rgba(93,212,186,.35); background:#000; }
+    .slideshow-track { display:flex; transition:transform .65s cubic-bezier(.4,0,.2,1); will-change:transform; }
+    .slideshow-slide { min-width:100%; height:380px; position:relative; flex-shrink:0; }
+    .slideshow-slide img { width:100%; height:100%; object-fit:cover; display:block; }
+    .slideshow-btn { position:absolute; top:50%; transform:translateY(-50%); z-index:10; background:rgba(26,26,62,.72); border:2px solid rgba(93,212,186,.5); color:var(--bright-teal); width:44px; height:44px; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; transition:all .2s; backdrop-filter:blur(4px); font-size:1.5rem; line-height:1; }
+    .slideshow-btn:hover { background:rgba(93,212,186,.3); border-color:var(--lime); color:var(--lime); }
+    .slideshow-prev { left:1rem; }
+    .slideshow-next { right:1rem; }
+    .slideshow-dots { position:absolute; bottom:.9rem; left:50%; transform:translateX(-50%); display:flex; gap:.5rem; z-index:10; }
+    .slideshow-dot { width:8px; height:8px; border-radius:50%; background:rgba(245,245,255,.35); cursor:pointer; transition:all .25s; border:none; padding:0; flex-shrink:0; }
+    .slideshow-dot.active { background:var(--lime); transform:scale(1.4); }
+    @media (max-width:560px) { .slideshow-slide { height:240px; } }
     .nav-links { display:flex; gap:2.5rem; list-style:none; }
     .nav-links a { color:var(--cream); text-decoration:none; font-size:.9rem; font-weight:700; letter-spacing:.16em; text-transform:uppercase; transition:color .2s; }
     .nav-links a:hover { color:var(--lime); }
@@ -212,6 +226,10 @@
       .form-row { grid-template-columns:1fr; }
       .show-row { grid-template-columns:90px 1fr auto; gap:1.2rem; }
       .video-grid { grid-template-columns:repeat(2,1fr); }
+      /* Mobile gradient: keep dark throughout so text stays readable */
+      body {
+        background: linear-gradient(to bottom, var(--deep-navy) 0%, var(--navy) 30%, var(--midnight-blue) 60%, var(--midnight-blue) 90%, var(--navy) 100%);
+      }
     }
     .nav-toggle { display:none; background:none; border:2px solid var(--bright-teal); color:var(--bright-teal); border-radius:8px; padding:.4rem .75rem; cursor:pointer; font-size:1.4rem; line-height:1; transition:color .2s, border-color .2s; }
     .nav-toggle:hover { color:var(--lime); border-color:var(--lime); }
@@ -223,6 +241,14 @@
       .nav-links a { display:block; padding:.8rem 1.5rem; font-size:.85rem; }
       .members-grid { grid-template-columns:1fr; }
       .doodle { opacity: 0.12 !important; }
+      /* Hero: give bottom padding so scroll indicator doesn't overlap buttons */
+      #hero { padding-bottom:7rem; }
+      .hero-cta { flex-direction:column; align-items:center; gap:.8rem; }
+      .hero-scroll { bottom:1.8rem; }
+      /* Shows: buttons wrap to their own row on mobile */
+      .show-row { grid-template-columns:80px 1fr; }
+      .show-row .btn-outline,
+      .show-row .show-tba-tag { grid-column:1/3; margin-top:.4rem; }
     }
   </style>
 </head>
@@ -331,7 +357,7 @@
   </svg>
 
   <nav>
-    <a href="#hero" class="nav-logo"><img src="midnight-snacks-wordmark.png" alt="Midnight Snacks" class="nav-wordmark" /></a>
+    <a href="#hero" class="nav-logo"><img src="images/midnight-snacks-wordmark.png" alt="Midnight Snacks" class="nav-wordmark" /></a>
     <ul class="nav-links">
       <li><a href="#about">About</a></li>
       <li><a href="#music">Music</a></li>
@@ -345,7 +371,7 @@
     <div class="hero-content">
       <p class="hero-eyebrow">Late-night grooves for early-morning people</p>
       <div class="hero-logo">
-        <img src="MIDNIGHT_SNACKS_STICKER_-_transparent.png" alt="Midnight Snacks Logo" />
+        <img src="images/MIDNIGHT_SNACKS_STICKER_-_transparent.png" alt="Midnight Snacks Logo" />
       </div>
       <h1 class="hero-title">Midnight Snacks</h1>
       <p class="hero-sub">Est. 2019 · Glenville, NY</p>
@@ -380,31 +406,68 @@
       </div>
       <div class="members-grid reveal">
         <div class="member-card">
-          <div class="member-avatar av-1"><img src="chris.png" alt="Chris"></div>
+          <div class="member-avatar av-1"><img src="images/chris.png" alt="Chris"></div>
           <div class="member-name">Chris</div>
           <div class="member-role">Guitar · Vocals</div>
           <p class="member-bio">Chris teaches music theory and technology at Union College, which means he spent years in graduate school analyzing and writing compositions only to end up playing "Tweezer" in places where the floor is concerningly sticky. Over the years he's accumulated several guitars, each one acquired with ironclad justification ("this one has humbuckers" / "unique neck feel" / "of course I need another Strat"), and he's currently deep in research for number <em>shhh</em><sup>th</sup>. His academic training means he can explain exactly why a particular chord progression or modulation works, though he's learned not to do this mid-jam unless explicitly asked. His tone gets described as warm and vintage, which is code for "owns too many drive pedals."</p>
         </div>
         <div class="member-card">
-          <div class="member-avatar av-2"><img src="matt.png" alt="Matt"></div>
+          <div class="member-avatar av-2"><img src="images/matt.png" alt="Matt"></div>
           <div class="member-name">Matt</div>
           <div class="member-role">Keys · Lead Vocals</div>
           <p class="member-bio">Matt grew up playing violin and piano before discovering the electric piano and Hammond organ in what can only be described as a spiritual experience. He teaches high school English during the week, which means he can't turn off the part of his brain that needs to find deeper meaning in everything — yes, especially Phish lyrics. At the keys, he somehow channels both the discipline of his musical training and the pure childlike joy of someone who just realized rules are merely suggestions. Blessed with a voice so smooth it could make a DMV form sound like Shakespeare, he also has more hair than the rest of the band combined. This gets mentioned at least once per practice, usually by Jay.</p>
         </div>
         <div class="member-card">
-          <div class="member-avatar av-3"><img src="gary.png" alt="Gary"></div>
+          <div class="member-avatar av-3"><img src="images/gary.png" alt="Gary"></div>
           <div class="member-name">Gary</div>
           <div class="member-role">Bass · Lead Vocals</div>
           <p class="member-bio">Gary's been a fixture in the local music scene since the bass was bigger than him, logging time in multiple bands across the Capital Region. He and Jay go way back to a high school metal band, which explains both their telepathic musical connection and why certain songs end up sounding mysteriously heavier than intended. Gary doesn't waste words — he lets the bass do his talking while his face maintains an expression best described as "intense concentration with occasional meaningful eyebrow and chin activity." Make the mistake of asking him about bass gear and you've just enrolled yourself in a masterclass you didn't know you needed.</p>
         </div>
         <div class="member-card">
-          <div class="member-avatar av-4"><img src="jay.png" alt="Jay"></div>
+          <div class="member-avatar av-4"><img src="images/jay.png" alt="Jay"></div>
           <div class="member-name">Jay</div>
           <div class="member-role">Drums · Vocals</div>
           <p class="member-bio">As a baby, Jay emerged from a kick drum like that rhino scene in Ace Ventura, and he's been telling the metronome how to do its job ever since. In addition to Midnight Snacks, Jay is active in the Capital Region metal scene and currently holds down the throne for the progressive metal band MIRA. He's never missed a beat on stage, which is impressive since Midnight Snacks treats the concept of "song length" as a polite suggestion rather than a rule, and drummers have actual human bodies. Those high school metal band days with Gary forged some kind of rhythmic telepathy that occasionally makes the rest of us in the band wonder if we're actually necessary.</p>
         </div>
       </div>
     </div>
+
+    <!-- Band Photo Slideshow -->
+    <div class="band-slideshow reveal">
+      <div class="slideshow-track" id="slideshowTrack">
+        <div class="slideshow-slide"><img src="images/slideshow/Cares_Cup_X_01787.jpeg" alt="Midnight Snacks" loading="lazy"></div>
+        <div class="slideshow-slide"><img src="images/slideshow/Cares_Cup_X_01796.jpeg" alt="Midnight Snacks" loading="lazy"></div>
+        <div class="slideshow-slide"><img src="images/slideshow/Cares_Cup_X_01803.jpeg" alt="Midnight Snacks" loading="lazy"></div>
+        <div class="slideshow-slide"><img src="images/slideshow/FullSizeRender.jpeg" alt="Midnight Snacks" loading="lazy"></div>
+        <div class="slideshow-slide"><img src="images/slideshow/IMG_1348.jpeg" alt="Midnight Snacks" loading="lazy"></div>
+        <div class="slideshow-slide"><img src="images/slideshow/IMG_1455.jpeg" alt="Midnight Snacks" loading="lazy"></div>
+        <div class="slideshow-slide"><img src="images/slideshow/IMG_1960.jpeg" alt="Midnight Snacks" loading="lazy"></div>
+        <div class="slideshow-slide"><img src="images/slideshow/IMG_2219.jpeg" alt="Midnight Snacks" loading="lazy"></div>
+        <div class="slideshow-slide"><img src="images/slideshow/IMG_3161.jpeg" alt="Midnight Snacks" loading="lazy"></div>
+        <div class="slideshow-slide"><img src="images/slideshow/IMG_5511.jpeg" alt="Midnight Snacks" loading="lazy"></div>
+        <div class="slideshow-slide"><img src="images/slideshow/PXL_20250920_212306177.jpg" alt="Midnight Snacks" loading="lazy"></div>
+        <div class="slideshow-slide"><img src="images/slideshow/PXL_20250920_213311251.jpg" alt="Midnight Snacks" loading="lazy"></div>
+        <div class="slideshow-slide"><img src="images/slideshow/PXL_20250920_235924591.jpg" alt="Midnight Snacks" loading="lazy"></div>
+      </div>
+      <button class="slideshow-btn slideshow-prev" id="slidePrev" aria-label="Previous photo">&#8249;</button>
+      <button class="slideshow-btn slideshow-next" id="slideNext" aria-label="Next photo">&#8250;</button>
+      <div class="slideshow-dots" id="slideshowDots">
+        <button class="slideshow-dot active" aria-label="Photo 1"></button>
+        <button class="slideshow-dot" aria-label="Photo 2"></button>
+        <button class="slideshow-dot" aria-label="Photo 3"></button>
+        <button class="slideshow-dot" aria-label="Photo 4"></button>
+        <button class="slideshow-dot" aria-label="Photo 5"></button>
+        <button class="slideshow-dot" aria-label="Photo 6"></button>
+        <button class="slideshow-dot" aria-label="Photo 7"></button>
+        <button class="slideshow-dot" aria-label="Photo 8"></button>
+        <button class="slideshow-dot" aria-label="Photo 9"></button>
+        <button class="slideshow-dot" aria-label="Photo 10"></button>
+        <button class="slideshow-dot" aria-label="Photo 11"></button>
+        <button class="slideshow-dot" aria-label="Photo 12"></button>
+        <button class="slideshow-dot" aria-label="Photo 13"></button>
+      </div>
+    </div>
+
   </section></div>
 
 
@@ -440,8 +503,8 @@
       <div class="setlist-heading">Live Videos</div>
       <div class="video-grid">
         <div class="video-card">
-          <div class="video-embed video-placeholder">
-            <span class="video-placeholder-text">📹 Video Coming Soon</span>
+          <div class="video-embed" style="padding-top:75%">
+            <iframe src="https://player.vimeo.com/video/1174056398?h=bf8cc73448&badge=0&autopause=0&player_id=0&app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" title="Special Treat"></iframe>
           </div>
           <div class="video-title">Special Treat</div>
           <div class="video-meta">
@@ -693,6 +756,35 @@
       secs.forEach(s=>{if(window.scrollY>=s.offsetTop-130)cur=s.id;});
       nls.forEach(a=>{a.style.color=a.getAttribute('href')==='#'+cur?'var(--lime)':'';});
     });
+
+    // Band Photo Slideshow
+    (function(){
+      const track=document.getElementById('slideshowTrack');
+      if(!track)return;
+      const slides=track.querySelectorAll('.slideshow-slide');
+      const dots=document.querySelectorAll('.slideshow-dot');
+      let cur=0, timer;
+      function goTo(n){
+        cur=(n+slides.length)%slides.length;
+        track.style.transform='translateX(-'+cur*100+'%)';
+        dots.forEach((d,i)=>d.classList.toggle('active',i===cur));
+      }
+      function startAuto(){timer=setInterval(()=>goTo(cur+1),4500);}
+      function stopAuto(){clearInterval(timer);}
+      document.getElementById('slideNext').addEventListener('click',()=>{stopAuto();goTo(cur+1);startAuto();});
+      document.getElementById('slidePrev').addEventListener('click',()=>{stopAuto();goTo(cur-1);startAuto();});
+      dots.forEach((d,i)=>d.addEventListener('click',()=>{stopAuto();goTo(i);startAuto();}));
+      // Touch/swipe support
+      let touchX=0;
+      track.addEventListener('touchstart',e=>{touchX=e.touches[0].clientX;},{passive:true});
+      track.addEventListener('touchend',e=>{
+        const dx=e.changedTouches[0].clientX-touchX;
+        if(Math.abs(dx)>40){stopAuto();goTo(cur+(dx<0?1:-1));startAuto();}
+      },{passive:true});
+      goTo(0);
+      startAuto();
+    })();
   </script>
+  <script src="https://player.vimeo.com/api/player.js"></script>
 </body>
 </html>
