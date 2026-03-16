@@ -155,11 +155,11 @@
     .audio-list { display:grid; grid-template-columns:repeat(2,1fr); gap:.75rem; margin-bottom:3.5rem; }
     .audio-card { padding:.75rem 1rem; background:rgba(93,212,186,.08); border:3px solid rgba(93,212,186,.3); border-radius:16px; transition:border-color .2s, background .2s; }
     .audio-card:hover { border-color:var(--bright-teal); background:rgba(93,212,186,.13); }
-    .audio-header { display:flex; align-items:center; gap:.6rem; margin-bottom:.5rem; flex-wrap:wrap; }
+    .audio-header { display:flex; align-items:center; gap:.6rem; margin-bottom:.4rem; flex-wrap:wrap; }
     .audio-title { font-family:'Caveat',cursive; font-size:1.4rem; font-weight:700; color:var(--white); flex:0 0 100%; min-height:3.2rem; }
     .audio-date { font-size:.8rem; font-family:'Patrick Hand',cursive; color:rgba(245,245,255,.5); letter-spacing:.1em; white-space:nowrap; }
     .audio-card audio { width:100%; }
-    .audio-player-frame { width:100%; height:80px; border:none; border-radius:6px; display:block; }
+    .audio-player-frame { width:calc(100% + 2rem); margin-left:-1rem; margin-bottom:-.75rem; height:56px; border:none; border-radius:0 0 12px 12px; display:block; }
     .video-embed.video-placeholder { display:flex; align-items:center; justify-content:center; }
     .video-placeholder-text { font-family:'Patrick Hand',cursive; font-size:.9rem; letter-spacing:.1em; color:rgba(245,245,255,.35); }
 
