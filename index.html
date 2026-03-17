@@ -158,8 +158,15 @@
     .audio-header { display:flex; align-items:center; gap:.6rem; margin-bottom:.4rem; flex-wrap:wrap; }
     .audio-title { font-family:'Caveat',cursive; font-size:1.4rem; font-weight:700; color:var(--white); flex:0 0 100%; min-height:3.2rem; }
     .audio-date { font-size:.8rem; font-family:'Patrick Hand',cursive; color:rgba(245,245,255,.5); letter-spacing:.1em; white-space:nowrap; }
-    .audio-card audio { width:100%; }
-    .audio-player-frame { width:calc(100% + 2rem); margin-left:-1rem; margin-bottom:-.75rem; height:56px; border:none; border-radius:0 0 12px 12px; display:block; }
+    .audio-player { display:flex; align-items:center; gap:.75rem; padding:.55rem 1rem; background:rgba(0,0,0,.28); margin:0 -1rem -.75rem; border-radius:0 0 12px 12px; }
+    .player-btn { width:34px; height:34px; border-radius:50%; background:rgba(93,212,186,.12); border:2px solid rgba(93,212,186,.5); color:var(--bright-teal); flex-shrink:0; display:flex; align-items:center; justify-content:center; cursor:pointer; transition:all .2s; padding:0; }
+    .player-btn:hover { background:rgba(93,212,186,.25); border-color:var(--lime); color:var(--lime); }
+    .player-progress { flex:1; display:flex; flex-direction:column; gap:.3rem; min-width:0; }
+    .player-bar-wrap { height:4px; background:rgba(255,255,255,.15); border-radius:2px; cursor:pointer; }
+    .player-bar-fill { height:100%; background:linear-gradient(90deg,var(--bright-teal),var(--lime)); border-radius:2px; width:0%; pointer-events:none; }
+    .player-time { font-size:.7rem; font-family:'Patrick Hand',cursive; color:rgba(245,245,255,.4); letter-spacing:.05em; }
+    .audio-card.is-playing { border-color:rgba(93,212,186,.7); background:rgba(93,212,186,.13); }
+    .audio-card.is-playing .player-btn { border-color:var(--lime); color:var(--lime); background:rgba(144,238,144,.15); }
     .video-embed.video-placeholder { display:flex; align-items:center; justify-content:center; }
     .video-placeholder-text { font-family:'Patrick Hand',cursive; font-size:.9rem; letter-spacing:.1em; color:rgba(245,245,255,.35); }
 
@@ -490,7 +497,13 @@
             <span class="audio-date">Aug 2025</span>
             <span class="media-tag tag-cover">Cover</span>
           </div>
-          <iframe src="https://drive.google.com/file/d/1wn40Lc40xLhaHexlE_pIVEu7JfufgLo3/preview" class="audio-player-frame" allow="autoplay"></iframe>
+          <div class="audio-player" data-src="audio/funky-bitch.mp3">
+            <button class="player-btn" aria-label="Play"><svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14"><path d="M8 5v14l11-7z"/></svg></button>
+            <div class="player-progress">
+              <div class="player-bar-wrap"><div class="player-bar-fill"></div></div>
+              <span class="player-time">0:00 / –:––</span>
+            </div>
+          </div>
         </div>
         <div class="audio-card">
           <div class="audio-header">
@@ -498,7 +511,13 @@
             <span class="audio-date">Oct 2025</span>
             <span class="media-tag tag-original">Original</span>
           </div>
-          <iframe src="https://drive.google.com/file/d/1VkH1RjPbKB4mheIW67JW2Af319gaI02Q/preview" class="audio-player-frame" allow="autoplay"></iframe>
+          <div class="audio-player" data-src="audio/matt-destroys-the-world.mp3">
+            <button class="player-btn" aria-label="Play"><svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14"><path d="M8 5v14l11-7z"/></svg></button>
+            <div class="player-progress">
+              <div class="player-bar-wrap"><div class="player-bar-fill"></div></div>
+              <span class="player-time">0:00 / –:––</span>
+            </div>
+          </div>
         </div>
         <div class="audio-card">
           <div class="audio-header">
@@ -506,7 +525,13 @@
             <span class="audio-date">Oct 2025</span>
             <span class="media-tag tag-cover">Cover</span>
           </div>
-          <iframe src="https://drive.google.com/file/d/1nlMingjaz-1Stg7Erjrkjtlb6XLkdtjP/preview" class="audio-player-frame" allow="autoplay"></iframe>
+          <div class="audio-player" data-src="audio/cissy-strut.mp3">
+            <button class="player-btn" aria-label="Play"><svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14"><path d="M8 5v14l11-7z"/></svg></button>
+            <div class="player-progress">
+              <div class="player-bar-wrap"><div class="player-bar-fill"></div></div>
+              <span class="player-time">0:00 / –:––</span>
+            </div>
+          </div>
         </div>
         <div class="audio-card">
           <div class="audio-header">
@@ -514,7 +539,13 @@
             <span class="audio-date">May 2025</span>
             <span class="media-tag tag-cover">Cover</span>
           </div>
-          <iframe src="https://drive.google.com/file/d/1PBKJoKZs_uRZlwgCqmqBhmuTKE8EV76P/preview" class="audio-player-frame" allow="autoplay"></iframe>
+          <div class="audio-player" data-src="audio/wolfmans-brother.mp3">
+            <button class="player-btn" aria-label="Play"><svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14"><path d="M8 5v14l11-7z"/></svg></button>
+            <div class="player-progress">
+              <div class="player-bar-wrap"><div class="player-bar-fill"></div></div>
+              <span class="player-time">0:00 / –:––</span>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -813,6 +844,40 @@
       startAuto();
       // Recalculate position on resize / orientation change
       window.addEventListener('resize',()=>goTo(cur));
+    })();
+
+    // Custom Audio Players
+    (function(){
+      const PLAY  = '<svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14"><path d="M8 5v14l11-7z"/></svg>';
+      const PAUSE = '<svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>';
+      function fmt(s){ const m=Math.floor(s/60),sec=Math.floor(s%60); return m+':'+(sec<10?'0':'')+sec; }
+      const all = [];
+      document.querySelectorAll('.audio-player').forEach(function(el){
+        const audio   = new Audio(el.dataset.src);
+        const btn     = el.querySelector('.player-btn');
+        const fill    = el.querySelector('.player-bar-fill');
+        const barWrap = el.querySelector('.player-bar-wrap');
+        const timeEl  = el.querySelector('.player-time');
+        const card    = el.closest('.audio-card');
+        all.push({audio,btn,card});
+        function pauseOthers(){
+          all.forEach(function(p){ if(p.audio!==audio && !p.audio.paused){ p.audio.pause(); p.btn.innerHTML=PLAY; p.card.classList.remove('is-playing'); } });
+        }
+        btn.addEventListener('click',function(){
+          if(audio.paused){ pauseOthers(); audio.play(); btn.innerHTML=PAUSE; card.classList.add('is-playing'); }
+          else { audio.pause(); btn.innerHTML=PLAY; card.classList.remove('is-playing'); }
+        });
+        audio.addEventListener('timeupdate',function(){
+          if(audio.duration){ fill.style.width=(audio.currentTime/audio.duration*100)+'%'; timeEl.textContent=fmt(audio.currentTime)+' / '+fmt(audio.duration); }
+        });
+        audio.addEventListener('loadedmetadata',function(){ timeEl.textContent='0:00 / '+fmt(audio.duration); });
+        audio.addEventListener('ended',function(){ fill.style.width='0%'; btn.innerHTML=PLAY; card.classList.remove('is-playing'); timeEl.textContent='0:00 / '+fmt(audio.duration); });
+        barWrap.addEventListener('click',function(e){
+          if(!audio.duration)return;
+          const r=barWrap.getBoundingClientRect();
+          audio.currentTime=((e.clientX-r.left)/r.width)*audio.duration;
+        });
+      });
     })();
   </script>
   <script src="https://player.vimeo.com/api/player.js"></script>
