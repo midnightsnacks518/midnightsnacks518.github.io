@@ -215,6 +215,11 @@
     @keyframes meteorFall { 0%{transform:translate(0,0) rotate(0deg);opacity:1} 100%{transform:translate(55vw,115vh) rotate(600deg);opacity:0} }
     .snack-meteor { position:fixed; pointer-events:none; z-index:9999; line-height:1; animation:meteorFall linear forwards; will-change:transform; }
 
+    /* Alien flyby */
+    @keyframes alienFlyRight { 0%{transform:translateX(0) scaleX(1);opacity:0} 5%{opacity:.75} 95%{opacity:.75} 100%{transform:translateX(110vw) scaleX(1);opacity:0} }
+    @keyframes alienFlyLeft  { 0%{transform:translateX(0) scaleX(-1);opacity:0} 5%{opacity:.75} 95%{opacity:.75} 100%{transform:translateX(-110vw) scaleX(-1);opacity:0} }
+    .alien-ufo { position:fixed; pointer-events:none; z-index:5; will-change:transform; }
+
     footer { border-top:3px dashed rgba(93,212,186,.3); padding:3rem 2rem; max-width:1100px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1.2rem; position:relative; z-index:2; }
     .footer-brand { font-family:'Caveat',cursive; font-size:1.8rem; font-weight:700; color:var(--bright-teal); text-shadow:0 0 15px rgba(93,212,186,.4); letter-spacing:.02em; }
     .footer-copy { font-size:.875rem; font-weight:600; letter-spacing:.1em; color:rgba(245,245,255,.45); font-family:'Patrick Hand',cursive; }
@@ -383,7 +388,7 @@
         <img src="images/MIDNIGHT_SNACKS_STICKER_-_transparent.png" alt="Midnight Snacks Logo" />
       </div>
       <h1 class="hero-title">Midnight Snacks</h1>
-      <p class="hero-sub">Est. 2019 · Glenville, NY</p>
+      <p class="hero-sub">Est. 2023 · Glenville, NY</p>
       <div class="hero-cta" style="margin-top:2.8rem;">
         <a href="#music" class="btn btn-primary">Hear the Music</a>
         <a href="#shows" class="btn btn-outline">Upcoming Shows</a>
@@ -402,14 +407,11 @@
     <div class="about-grid">
       <div class="about-text reveal">
         <p><strong>Midnight Snacks</strong> materialized on a cold November night in 2023 when four Glenville musicians who'd been friends for years finally asked the obvious question: "Wait, why haven't we ever actually played music together?" What started as a single jam in Gary's basement has since evolved into a full-blown sonic expedition now headquartered on Chris's sun porch, where the neighbors have learned to embrace the flashing lights and long guitar solos.</p>
-        <p>The band draws from the great cosmic tradition of playing a little too long, a little too loud, and a lot from the heart. Rooted in <strong>Phish, the Grateful Dead, and classic rock</strong>, Midnight Snacks weaves in jazz harmony, funky grooves, electronica, moments of blissful chaos that somehow resolve into coherence, and the occasional 17-minute improvisation that nobody asked for but everyone remembers. They arrived from different musical galaxies — metal bands, jam traditions, theory academia — yet somehow speak the same language when the downbeat hits.</p>
+        <p>The band draws from the great cosmic tradition of playing a little too long, a little too loud, and a lot from the heart. Rooted in Phish, the Grateful Dead, and classic rock, Midnight Snacks weaves in jazz harmony, funky grooves, electronica, moments of blissful chaos that somehow resolve into coherence, and the occasional 17-minute improvisation that nobody asked for but everyone remembers. They arrived from different musical galaxies — metal bands, jam traditions, theory academia — yet somehow speak the same language when the downbeat hits.</p>
         <p>The live experience is equal parts tight execution and beautiful unpredictability, complete with vocal harmonies that exist somewhere between "enthusiastic" and "we're doing our best here," and enough extended jamming to make you forget what planet you're on. That is, of course, the point.</p>
         <p style="font-size:.8rem;color:rgba(245,245,255,.5);font-style:italic;margin-top:1.2rem;">"I told my kids I'd be home by 10. I got home at midnight. Everyone survived and I have zero regrets." — anonymous listener, Ballston Lake</p>
         <div class="genre-tags">
-          <span class="genre-tag">Jam Band</span>
           <span class="genre-tag">Psychedelic Rock</span>
-          <span class="genre-tag">Grateful Dead</span>
-          <span class="genre-tag">Phish</span>
           <span class="genre-tag">Live Improv</span>
         </div>
       </div>
@@ -486,7 +488,7 @@
       <h2 class="section-title">Listen</h2>
       <div class="divider"></div>
     </div>
-    <p class="music-intro reveal">Every Midnight Snacks show is its own thing: different setlist, different jams, different odds that Jay will play a fill that makes the rest of the band briefly forget they're playing instruments. Below is a taste of what you might hear on any given night. <strong>Come find out for yourself.</strong></p>
+    <p class="music-intro reveal">Every Midnight Snacks show is its own thing: different setlist, different jams, different odds that Jay will play a fill that makes the rest of the band briefly forget they're playing instruments. Below is a taste of what you might hear on any given night. <strong><a href="#shows" style="color:var(--lime);text-decoration:none;">Come find out for yourself.</a></strong></p>
     <div class="reveal">
 
       <div class="setlist-heading">Audio Recordings</div>
@@ -650,7 +652,7 @@
       <div class="show-row">
         <div class="show-date">
           <div class="show-date-day tba">TBA</div>
-          <div class="show-date-month">Apr 2026</div>
+          <div class="show-date-month">Spring 2026</div>
         </div>
         <div class="show-info">
           <div class="show-venue">TJ's Flightline Pub</div>
@@ -661,7 +663,7 @@
       <div class="show-row">
         <div class="show-date">
           <div class="show-date-day tba">TBA</div>
-          <div class="show-date-month">Jul 2026</div>
+          <div class="show-date-month">Summer 2026</div>
         </div>
         <div class="show-info">
           <div class="show-venue">Lazy Bear Campground</div>
@@ -681,7 +683,7 @@
     </div>
     <div class="contact-grid">
       <div class="contact-info reveal">
-        <p>For booking inquiries, press requests, or to tell us we played too long (we did, and we'll do it again), reach out below. We try to respond within a few business days, or whenever Gary remembers to check email.</p>
+        <p>For booking inquiries or to tell us we played too long (we did, and we'll do it again), reach out below. We try to respond within a few business days, or whenever Gary remembers to check email.</p>
         <div class="contact-links">
           <a href="mailto:midnightsnacks518@gmail.com" class="contact-link">
             <div class="contact-link-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 8l10 6 10-6"/></svg></div>
@@ -765,6 +767,50 @@
         },i*55);
       }
     }
+
+    // Alien flyby
+    function spawnAlien(){
+      const goRight = Math.random() > 0.5;
+      const ufo = document.createElement('div');
+      ufo.className = 'alien-ufo';
+      const top = 8 + Math.random() * 55; // 8–63% from top
+      const dur = 7 + Math.random() * 6;  // 7–13s
+      ufo.style.cssText = `top:${top}vh;${goRight?'left:-120px':'right:-120px'};animation:${goRight?'alienFlyRight':'alienFlyLeft'} ${dur}s linear forwards;`;
+      ufo.innerHTML = `<svg width="80" height="52" viewBox="0 0 80 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- beam -->
+        <polygon points="30,36 50,36 60,52 20,52" fill="rgba(180,255,200,0.18)"/>
+        <!-- saucer body -->
+        <ellipse cx="40" cy="30" rx="34" ry="10" fill="#7ecfb0" opacity=".85"/>
+        <ellipse cx="40" cy="30" rx="34" ry="10" fill="none" stroke="#b0ffe0" stroke-width="1.5" opacity=".5"/>
+        <!-- dome -->
+        <ellipse cx="40" cy="26" rx="16" ry="10" fill="#c8f7e8" opacity=".75"/>
+        <ellipse cx="40" cy="26" rx="16" ry="10" fill="none" stroke="#b0ffe0" stroke-width="1" opacity=".4"/>
+        <!-- alien head inside dome -->
+        <ellipse cx="40" cy="23" rx="8" ry="7" fill="#a0e8b0" opacity=".9"/>
+        <circle cx="37" cy="21" r="2" fill="#1a1a3e"/>
+        <circle cx="43" cy="21" r="2" fill="#1a1a3e"/>
+        <circle cx="37.6" cy="20.4" r=".7" fill="white"/>
+        <circle cx="43.6" cy="20.4" r=".7" fill="white"/>
+        <!-- antennae -->
+        <line x1="37" y1="16" x2="34" y2="11" stroke="#a0e8b0" stroke-width="1.2"/>
+        <circle cx="34" cy="10.5" r="1.5" fill="#5dd4ba"/>
+        <line x1="43" y1="16" x2="46" y2="11" stroke="#a0e8b0" stroke-width="1.2"/>
+        <circle cx="46" cy="10.5" r="1.5" fill="#5dd4ba"/>
+        <!-- lights -->
+        <circle cx="18" cy="30" r="3" fill="#5dd4ba" opacity=".9"/>
+        <circle cx="29" cy="33" r="2.5" fill="#c6f135" opacity=".9"/>
+        <circle cx="40" cy="34" r="2.5" fill="#5dd4ba" opacity=".9"/>
+        <circle cx="51" cy="33" r="2.5" fill="#c6f135" opacity=".9"/>
+        <circle cx="62" cy="30" r="3" fill="#5dd4ba" opacity=".9"/>
+      </svg>`;
+      document.body.appendChild(ufo);
+      ufo.addEventListener('animationend', () => ufo.remove());
+    }
+    // First flyby after 20–40s, then every 45–90s
+    setTimeout(function scheduleAlien(){
+      spawnAlien();
+      setTimeout(scheduleAlien, 45000 + Math.random() * 45000);
+    }, 20000 + Math.random() * 20000);
 
     // Scroll reveal
     const obs=new IntersectionObserver(entries=>{
