@@ -189,6 +189,10 @@
     .show-row .btn-outline { padding:.65rem 1.4rem; }
     .show-tba-tag { display:inline-flex; align-items:center; padding:.55rem 1.2rem; border-radius:25px; font-size:.8rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; border:2px dashed rgba(245,245,255,.2); color:rgba(245,245,255,.4); font-family:'Patrick Hand',cursive; white-space:nowrap; font-style:italic; }
     .show-date-day.tba { font-size:1.4rem; letter-spacing:.08em; color:rgba(245,245,255,.45); padding-top:.4rem; }
+    .shows-subheading { font-family:'Caveat',cursive; font-size:1.25rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; margin-bottom:.8rem; color:var(--bright-teal); opacity:.8; }
+    .shows-subheading.past-label { color:rgba(245,245,255,.4); }
+    .show-past { opacity:.55; transition:opacity .2s; }
+    .show-past:hover { opacity:.85; }
 
     .contact-grid { display:grid; grid-template-columns:1fr 1.3fr; gap:5rem; align-items:start; }
     .contact-info p { font-size:1.2rem; color:rgba(245,245,255,.8); line-height:1.9; margin-bottom:2rem; }
@@ -632,43 +636,14 @@
   <div class="section-wrap"><section id="shows">
     <div class="reveal">
       <p class="section-label">✦ 03 — Shows</p>
-      <h2 class="section-title">Upcoming Dates</h2>
+      <h2 class="section-title">Shows</h2>
       <div class="divider"></div>
     </div>
-    <div class="shows-list reveal">
-      <div class="show-row">
-        <div class="show-date">
-          <div class="show-date-day">20</div>
-          <div class="show-date-month">Mar 2026</div>
-        </div>
-        <div class="show-info">
-          <div class="show-venue">Ballston Lakeview Tavern</div>
-          <div class="show-location">Ballston Lake, NY</div>
-        </div>
-        <a href="https://www.facebook.com/events/26385379334418751" class="btn btn-outline" target="_blank">More Info</a>
-      </div>
-      <div class="show-row">
-        <div class="show-date">
-          <div class="show-date-day tba">TBA</div>
-          <div class="show-date-month">Spring 2026</div>
-        </div>
-        <div class="show-info">
-          <div class="show-venue">TJ's Flightline Pub</div>
-          <div class="show-location">Glenville, NY</div>
-        </div>
-        <span class="show-tba-tag">More info to come</span>
-      </div>
-      <div class="show-row">
-        <div class="show-date">
-          <div class="show-date-day tba">TBA</div>
-          <div class="show-date-month">Summer 2026</div>
-        </div>
-        <div class="show-info">
-          <div class="show-venue">Lazy Bear Campground</div>
-          <div class="show-location">Broadalbin, NY</div>
-        </div>
-        <span class="show-tba-tag">More info to come</span>
-      </div>
+    <div class="shows-subheading reveal">Upcoming</div>
+    <div id="shows-upcoming" class="shows-list reveal"></div>
+    <div id="shows-past-wrap" style="margin-top:2.5rem;">
+      <div class="shows-subheading past-label reveal">Past Shows</div>
+      <div id="shows-past" class="shows-list reveal"></div>
     </div>
   </section></div>
 
@@ -809,6 +784,52 @@
       spawnAlien();
       setTimeout(scheduleAlien, 45000 + Math.random() * 45000);
     }, 20000 + Math.random() * 20000);
+
+    // Shows — auto-split upcoming vs past, sort each group
+    (function(){
+      const MONTHS=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+      const today=new Date(); today.setHours(0,0,0,0);
+      const shows=[
+        {date:'2026-03-20',venue:'Ballston Lakeview Tavern',location:'Ballston Lake, NY',link:'https://www.facebook.com/events/26385379334418751'},
+        {dateLabel:'Spring 2026',venue:"TJ's Flightline Pub",location:'Glenville, NY',tba:true},
+        {dateLabel:'Summer 2026',venue:'Lazy Bear Campground',location:'Broadalbin, NY',tba:true},
+        {date:'2025-10-19',venue:'Ellms Farm',location:'Ballston Spa, NY'},
+        {date:'2025-09-20',venue:'Ballston Lakeview Tavern',location:'Ballston Lake, NY'},
+        {date:'2025-08-08',venue:'Quarters Bar',location:'Saratoga Springs, NY'},
+        {date:'2025-06-13',venue:"Al's Roadhouse 2",location:'Amsterdam, NY'},
+        {date:'2025-05-10',venue:'Ballston Lakeview Tavern',location:'Ballston Lake, NY'},
+        {date:'2024-12-28',venue:"TJ's Flightline Pub",location:'Glenville, NY'},
+        {date:'2024-08-11',venue:"TJ's Flightline Pub",location:'Glenville, NY'},
+      ];
+      const upcoming=[],past=[];
+      shows.forEach(s=>{
+        if(s.tba){upcoming.push(s);return;}
+        s._d=new Date(s.date+'T12:00:00');
+        (s._d>=today?upcoming:past).push(s);
+      });
+      upcoming.sort((a,b)=>{if(a.tba&&b.tba)return 0;if(a.tba)return 1;if(b.tba)return -1;return a._d-b._d;});
+      past.sort((a,b)=>b._d-a._d);
+      function makeRow(s,isPast){
+        const row=document.createElement('div');
+        row.className='show-row'+(isPast?' show-past':'');
+        const dateHtml=s.tba
+          ?`<div class="show-date-day tba">TBA</div><div class="show-date-month">${s.dateLabel}</div>`
+          :`<div class="show-date-day">${s._d.getDate()}</div><div class="show-date-month">${MONTHS[s._d.getMonth()]} ${s._d.getFullYear()}</div>`;
+        const actionHtml=s.tba
+          ?`<span class="show-tba-tag">More info to come</span>`
+          :s.link
+            ?`<a href="${s.link}" class="btn btn-outline" target="_blank">More Info</a>`
+            :'';
+        row.innerHTML=`<div class="show-date">${dateHtml}</div><div class="show-info"><div class="show-venue">${s.venue}</div><div class="show-location">${s.location}</div></div>${actionHtml}`;
+        return row;
+      }
+      const upEl=document.getElementById('shows-upcoming');
+      const pastEl=document.getElementById('shows-past');
+      const pastWrap=document.getElementById('shows-past-wrap');
+      upcoming.forEach(s=>upEl.appendChild(makeRow(s,false)));
+      if(past.length){past.forEach(s=>pastEl.appendChild(makeRow(s,true)));}
+      else{pastWrap.style.display='none';}
+    })();
 
     // Scroll reveal
     const obs=new IntersectionObserver(entries=>{
