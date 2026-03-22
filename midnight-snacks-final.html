@@ -255,14 +255,16 @@
       .members-grid { grid-template-columns:1fr; }
       .audio-list { grid-template-columns:1fr; }
       .doodle { opacity: 0.12 !important; }
-      /* Hero: give bottom padding so scroll indicator doesn't overlap buttons */
-      #hero { padding-bottom:7rem; }
+      /* Hero: hide scroll indicator on mobile so it never overlaps the buttons */
+      .hero-scroll { display:none; }
       .hero-cta { flex-direction:column; align-items:center; gap:.8rem; }
-      .hero-scroll { bottom:1.8rem; }
-      /* Shows: buttons wrap to their own row on mobile */
+      /* Slideshow: use contain so images aren't cropped/blacked out on small screens */
+      .slideshow-slide { height:260px; }
+      .slideshow-slide img { object-fit:contain; }
+      /* Shows: buttons wrap to their own row, centered */
       .show-row { grid-template-columns:80px 1fr; }
       .show-row .btn-outline,
-      .show-row .show-tba-tag { grid-column:1/3; margin-top:.4rem; }
+      .show-row .show-tba-tag { grid-column:1/3; margin-top:.4rem; text-align:center; justify-content:center; }
     }
   </style>
 </head>
@@ -410,10 +412,6 @@
         <p>The band draws from the great cosmic tradition of playing a little too long, a little too loud, and a lot from the heart. Rooted in Phish, the Grateful Dead, and classic rock, Midnight Snacks weaves in jazz harmony, funky grooves, electronica, moments of blissful chaos that somehow resolve into coherence, and the occasional 17-minute improvisation that nobody asked for but everyone remembers. They arrived from different musical galaxies — metal bands, jam traditions, theory academia — yet somehow speak the same language when the downbeat hits.</p>
         <p>The live experience is equal parts tight execution and beautiful unpredictability, complete with vocal harmonies that exist somewhere between "enthusiastic" and "we're doing our best here," and enough extended jamming to make you forget what planet you're on. That is, of course, the point.</p>
         <p style="font-size:.8rem;color:rgba(245,245,255,.5);font-style:italic;margin-top:1.2rem;">"I told my kids I'd be home by 10. I got home at midnight. Everyone survived and I have zero regrets." — anonymous listener, Ballston Lake</p>
-        <div class="genre-tags">
-          <span class="genre-tag">Psychedelic Rock</span>
-          <span class="genre-tag">Live Improv</span>
-        </div>
       </div>
       <div class="members-grid reveal">
         <div class="member-card">
