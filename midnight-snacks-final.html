@@ -91,9 +91,6 @@
     .btn-outline { background:transparent; color:var(--bright-teal); border-color:var(--bright-teal); box-shadow:0 4px 12px rgba(93,212,186,.2); }
     .btn-outline:hover { background:var(--bright-teal); color:var(--deep-navy); transform:translateY(-3px) rotate(1deg); box-shadow:0 6px 20px rgba(93,212,186,.4); }
 
-    .hero-scroll { position:absolute; bottom:2rem; left:50%; transform:translateX(-50%); z-index:2; display:flex; flex-direction:column; align-items:center; gap:.5rem; opacity:0; animation:fadeIn 1s ease forwards 1.8s; }
-    .hero-scroll span { font-size:.6rem; letter-spacing:.3em; text-transform:uppercase; color:var(--white); font-weight:700; text-shadow:0 0 8px rgba(0,0,0,.6); }
-    .scroll-line { width:2px; height:40px; background:linear-gradient(to bottom, var(--white), transparent); animation:scrollPulse 2s ease-in-out infinite; border-radius:2px; }
 
     .section-wrap { position:relative; z-index:2; }
     section { padding:7rem 2rem; max-width:1100px; margin:0 auto; }
@@ -259,8 +256,6 @@
       .members-grid { grid-template-columns:1fr; }
       .audio-list { grid-template-columns:1fr; }
       .doodle { opacity: 0.12 !important; }
-      /* Hero: hide scroll indicator on mobile so it never overlaps the buttons */
-      .hero-scroll { display:none; }
       .hero-cta { flex-direction:column; align-items:center; gap:.8rem; }
       /* Slideshow: use contain so images aren't cropped/blacked out on small screens */
       .slideshow-slide { height:260px; }
@@ -400,7 +395,6 @@
         <a href="#shows" class="btn btn-outline">Upcoming Shows</a>
       </div>
     </div>
-    <div class="hero-scroll"><span>Scroll</span><div class="scroll-line"></div></div>
   </section>
 
 
@@ -434,7 +428,7 @@
           <div class="member-avatar av-3"><img src="images/gary.png" alt="Gary"></div>
           <div class="member-name">Gary</div>
           <div class="member-role">Bass · Lead Vocals</div>
-          <p class="member-bio">Gary's been a fixture in the local music scene since the bass was bigger than him, logging time in multiple bands across the Capital Region. He and Jay go way back to a high school metal band, which explains both their telepathic musical connection and why certain songs end up sounding mysteriously heavier than intended. Gary doesn't waste words — he lets the bass do his talking while his face maintains an expression best described as "intense concentration with occasional meaningful eyebrow and chin activity." Make the mistake of asking him about bass gear and you've just enrolled yourself in a masterclass you didn't know you needed.</p>
+          <p class="member-bio">Gary's been a fixture in the local music scene since the bass was bigger than him, logging time in multiple bands across the Capital Region — including opening for national touring acts such as Pigeons Playing Ping Pong and Magic Beans. He and Jay go way back to a high school metal band, which explains both their telepathic musical connection and why certain songs end up sounding mysteriously heavier than intended. Gary doesn't waste words — he lets the bass do his talking while his face maintains an expression best described as "intense concentration with occasional meaningful eyebrow and chin activity." Make the mistake of asking him about bass gear and you've just enrolled yourself in a masterclass you didn't know you needed.</p>
         </div>
         <div class="member-card">
           <div class="member-avatar av-4"><img src="images/jay.png" alt="Jay"></div>
