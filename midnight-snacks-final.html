@@ -163,6 +163,7 @@
     .player-bar-fill { height:100%; background:linear-gradient(90deg,var(--bright-teal),var(--lime)); border-radius:2px; width:0%; pointer-events:none; }
     .player-time { font-size:.7rem; font-family:'Patrick Hand',cursive; color:rgba(245,245,255,.4); letter-spacing:.05em; }
     .audio-card.is-playing { border-color:rgba(93,212,186,.7); background:rgba(93,212,186,.13); }
+    .audio-player-frame { width:calc(100% + 2rem); margin-left:-1rem; margin-bottom:-.75rem; height:56px; border:none; border-radius:0 0 12px 12px; display:block; }
     .audio-card.is-playing .player-btn { border-color:var(--lime); color:var(--lime); background:rgba(144,238,144,.15); }
     .video-embed.video-placeholder { display:flex; align-items:center; justify-content:center; }
     .video-placeholder-text { font-family:'Patrick Hand',cursive; font-size:.9rem; letter-spacing:.1em; color:rgba(245,245,255,.35); }
@@ -508,16 +509,10 @@
         <div class="audio-card">
           <div class="audio-header">
             <div class="audio-title">Matt Destroys the World</div>
-            <span class="audio-date">Oct 2025</span>
+            <span class="audio-date">Mar 2026</span>
             <span class="media-tag tag-original">Original</span>
           </div>
-          <div class="audio-player" data-src="audio/matt-destroys-the-world.mp3">
-            <button class="player-btn" aria-label="Play"><svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14"><path d="M8 5v14l11-7z"/></svg></button>
-            <div class="player-progress">
-              <div class="player-bar-wrap"><div class="player-bar-fill"></div></div>
-              <span class="player-time">0:00 / –:––</span>
-            </div>
-          </div>
+          <iframe src="https://drive.google.com/file/d/1M4UlF3FXh20jIBI9LQ-qkM8ujhR5rzN8/preview" class="audio-player-frame" allow="autoplay"></iframe>
         </div>
         <div class="audio-card">
           <div class="audio-header">
@@ -536,16 +531,18 @@
         <div class="audio-card">
           <div class="audio-header">
             <div class="audio-title">Wolfman's Brother</div>
-            <span class="audio-date">May 2025</span>
+            <span class="audio-date">Mar 2026</span>
             <span class="media-tag tag-cover">Cover</span>
           </div>
-          <div class="audio-player" data-src="audio/wolfmans-brother.mp3">
-            <button class="player-btn" aria-label="Play"><svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14"><path d="M8 5v14l11-7z"/></svg></button>
-            <div class="player-progress">
-              <div class="player-bar-wrap"><div class="player-bar-fill"></div></div>
-              <span class="player-time">0:00 / –:––</span>
-            </div>
+          <iframe src="https://drive.google.com/file/d/1C0egg2lILazJhAtVx5JgEK1IgvnTJxFF/preview" class="audio-player-frame" allow="autoplay"></iframe>
+        </div>
+        <div class="audio-card">
+          <div class="audio-header">
+            <div class="audio-title">a little squishy</div>
+            <span class="audio-date">Mar 2026</span>
+            <span class="media-tag tag-original">Original</span>
           </div>
+          <iframe src="https://drive.google.com/file/d/1gyIW4EhEz0axoPnbkPYnkxkzlU2MrmFP/preview" class="audio-player-frame" allow="autoplay"></iframe>
         </div>
       </div>
 
