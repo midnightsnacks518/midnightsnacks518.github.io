@@ -163,6 +163,11 @@
     .player-bar-wrap { height:4px; background:rgba(255,255,255,.15); border-radius:2px; cursor:pointer; }
     .player-bar-fill { height:100%; background:linear-gradient(90deg,var(--bright-teal),var(--lime)); border-radius:2px; width:0%; pointer-events:none; }
     .player-time { font-size:.7rem; font-family:'Patrick Hand',cursive; color:rgba(245,245,255,.4); letter-spacing:.05em; }
+    .player-vol { display:flex; align-items:center; gap:.35rem; flex-shrink:0; }
+    .player-vol svg { opacity:.4; flex-shrink:0; }
+    .vol-slider { -webkit-appearance:none; appearance:none; width:64px; height:3px; border-radius:2px; background:rgba(255,255,255,.18); outline:none; cursor:pointer; }
+    .vol-slider::-webkit-slider-thumb { -webkit-appearance:none; width:11px; height:11px; border-radius:50%; background:var(--bright-teal); cursor:pointer; }
+    .vol-slider::-moz-range-thumb { width:11px; height:11px; border-radius:50%; background:var(--bright-teal); cursor:pointer; border:none; }
     .audio-card.is-playing { border-color:rgba(93,212,186,.7); background:rgba(93,212,186,.13); }
     .audio-player-frame { width:calc(100% + 2rem); margin-left:-1rem; margin-bottom:-.75rem; height:56px; border:none; border-radius:0 0 12px 12px; display:block; }
     .audio-card.is-playing .player-btn { border-color:var(--lime); color:var(--lime); background:rgba(144,238,144,.15); }
@@ -537,11 +542,11 @@
         </div>
         <div class="audio-card">
           <div class="audio-header">
-            <div class="audio-title">Wolfman's Brother</div>
-            <span class="audio-date">Mar 2026</span>
+            <div class="audio-title">Sneakin' Sally Thru the Alley</div>
+            <span class="audio-date">Apr 2026</span>
             <span class="media-tag tag-cover">Cover</span>
           </div>
-          <div class="audio-player" data-src="audio/2026-03-20%2010%20Wolfman's%20Brother.mp3">
+          <div class="audio-player" data-src="audio/2026-04-26%20Flightline%2011%20Sneakin%20Sally.mp3">
             <button class="player-btn" aria-label="Play"><svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14"><path d="M8 5v14l11-7z"/></svg></button>
             <div class="player-progress">
               <div class="player-bar-wrap"><div class="player-bar-fill"></div></div>
@@ -940,6 +945,12 @@
         const barWrap = el.querySelector('.player-bar-wrap');
         const timeEl  = el.querySelector('.player-time');
         const card    = el.closest('.audio-card');
+        // Inject volume control
+        const volWrap = document.createElement('div');
+        volWrap.className = 'player-vol';
+        volWrap.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg><input type="range" class="vol-slider" min="0" max="1" step="0.05" value="1" aria-label="Volume">';
+        el.appendChild(volWrap);
+        const volSlider = volWrap.querySelector('.vol-slider');
         all.push({audio,btn,card});
         function pauseOthers(){
           all.forEach(function(p){ if(p.audio!==audio && !p.audio.paused){ p.audio.pause(); p.btn.innerHTML=PLAY; p.card.classList.remove('is-playing'); } });
@@ -958,6 +969,7 @@
           const r=barWrap.getBoundingClientRect();
           audio.currentTime=((e.clientX-r.left)/r.width)*audio.duration;
         });
+        volSlider.addEventListener('input',function(){ audio.volume=+volSlider.value; });
       });
     })();
   </script>
