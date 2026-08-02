@@ -190,6 +190,7 @@
     .show-date-month { font-size:.875rem; font-weight:700; letter-spacing:.2em; text-transform:uppercase; color:rgba(245,245,255,.55); margin-top:.2rem; font-family:'Patrick Hand',cursive; }
     .show-venue { font-family:'Caveat',cursive; font-size:1.5rem; font-weight:700; color:var(--white); margin-bottom:.2rem; letter-spacing:.01em; }
     .show-location { font-size:.95rem; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:rgba(245,245,255,.6); font-family:'Patrick Hand',cursive; }
+    .show-note { font-size:.8rem; color:rgba(245,245,255,.45); font-family:'Patrick Hand',cursive; letter-spacing:.06em; margin-top:.2rem; font-style:italic; }
     .show-row .btn-outline { padding:.65rem 1.4rem; }
     .show-tba-tag { display:inline-flex; align-items:center; padding:.55rem 1.2rem; border-radius:25px; font-size:.8rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; border:2px dashed rgba(245,245,255,.2); color:rgba(245,245,255,.4); font-family:'Patrick Hand',cursive; white-space:nowrap; font-style:italic; }
     .show-date-day.tba { font-size:1.4rem; letter-spacing:.08em; color:rgba(245,245,255,.45); padding-top:.4rem; }
@@ -811,7 +812,11 @@
         {date:'2026-04-25',venue:"TJ's Flightline Pub",location:'Glenville, NY',link:'https://www.facebook.com/events/3851755935132439'},
         {date:'2026-05-08',venue:'Ballston Lakeview Tavern',location:'Ballston Lake, NY',link:'https://www.facebook.com/share/1GUcMWzkhh/'},
         {date:'2026-06-27',venue:'The Eleven',location:'Albany, NY',link:'https://www.eventbrite.com/e/happy-hour-with-midnight-snacks-at-the-eleven-tickets-1988648301603?utm_experiment=test_share_listing&aff=ebdsshios'},
-        {date:'2026-07-18',venue:'Lazy Bear Campground',location:'Broadalbin, NY'},
+        {date:'2026-07-18',venue:'Lazy Bear Ice Cream',location:'Broadalbin, NY',note:'Rescheduled due to weather'},
+        {date:'2026-08-15',venue:'Ballston Lakeview Tavern',location:'Ballston Lake, NY',link:'https://www.facebook.com/events/1317713777016431/?acontext=%7B%22event_action_history%22%3A[%7B%22mechanism%22%3A%22your_upcoming_events_unit%22%2C%22surface%22%3A%22bookmark%22%7D]%2C%22ref_notif_type%22%3Anull%7D',note:'6–9pm'},
+        {date:'2026-09-20',venue:'Wolf Hollow Brewery',location:'Schenectady, NY',note:'12–4pm'},
+        {date:'2026-09-26',venue:'Lazy Bear Ice Cream',location:'Broadalbin, NY',note:'12–4pm'},
+        {date:'2026-10-17',venue:'The Eleven',location:'Albany, NY',note:'6–8pm · Happy Hour show before Reprise'},
         {date:'2025-10-19',venue:'Ellms Farm',location:'Ballston Spa, NY',link:'https://www.facebook.com/events/810408021380459/'},
         {date:'2025-09-20',venue:'Ballston Lakeview Tavern',location:'Ballston Lake, NY',link:'https://www.facebook.com/events/797250699426817/'},
         {date:'2025-08-08',venue:'Quarters Bar',location:'Saratoga Springs, NY',link:'https://www.facebook.com/events/766904322686234/'},
@@ -838,8 +843,9 @@
           ?`<span class="show-tba-tag">More info to come</span>`
           :s.link
             ?`<a href="${s.link}" class="btn btn-outline" target="_blank">More Info</a>`
-            :'';
-        row.innerHTML=`<div class="show-date">${dateHtml}</div><div class="show-info"><div class="show-venue">${s.venue}</div><div class="show-location">${s.location}</div></div>${actionHtml}`;
+            :`<span class="show-tba-tag">More info to come</span>`;
+        const noteHtml=s.note?`<div class="show-note">${s.note}</div>`:'';
+        row.innerHTML=`<div class="show-date">${dateHtml}</div><div class="show-info"><div class="show-venue">${s.venue}</div><div class="show-location">${s.location}</div>${noteHtml}</div>${actionHtml}`;
         return row;
       }
       const upEl=document.getElementById('shows-upcoming');
